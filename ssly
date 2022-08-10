@@ -1,0 +1,19 @@
+#!/bin/bash
+
+set -e
+
+while getopts ':c:d:' opt
+do
+	case $opt in
+		c)
+			curl -fsSL -H 'content-type: application/json' \
+			-d "{\"data\":\"$OPTARG\",\"ttl\":600}" \
+			https://sendsecure.ly/api/secrets | \
+			grep -i -o '[a-z0-9]\{8\}\-[a-z0-9]\{4\}\-[a-z0-9]\{4\}\-[a-z0-9]\{4\}\-[a-z0-9]\{12\}'
+			;;
+		d)
+			_res="`curl -fsSL https://sendsecure.ly/api/secrets/$OPTARG`"
+			echo ${_res:9:$[${#_res}-11]}
+			;;
+	esac
+done

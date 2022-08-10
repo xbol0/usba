@@ -1,0 +1,45 @@
+#!/bin/bash
+
+set -e
+
+_lport=9000
+_rport=$[RANDOM*2%40000+10000]
+_sid='1'
+
+# local_port, remote_port, server_id
+_frpc_tcp() {
+	frpc tcp -l $1 -r $2 -t freefrp.net -s frp${3}.freefrp.net:7000 --ue --uc
+}
+
+{
+	if not type frpc >/dev/null 2>&1
+	then
+		printf "Command frpc not found, Please install frpc first."
+		exit 1
+	fi
+
+	while getopts ":l:r:s:h" opt
+	do
+		case $opt in
+			l)
+				_lport=$OPTARG
+				;;
+			r)
+				_rport=$OPTARG
+				;;
+			s)
+				_sid=$OPTARG
+				;;
+			h)
+				printf "Usage: %s [-r port] [-l port] [-s 1,2,3,4]\n" $(basename $0)
+				exit 0
+				;;
+		esac
+	done
+
+	echo "Local port: $_lport"
+	echo "Remote port: $_rport"
+	echo "Server: frp${_sid}.freefrp.net"
+
+	_frpc_tcp $_lport $_rport $_sid
+}

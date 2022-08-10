@@ -1,0 +1,55 @@
+#!/bin/bash
+
+set -e
+
+_arch=`uname -s`
+_port='9000'
+_use_ncat=0
+
+_osx_nc() {
+	nc -lvn $1
+}
+
+_linux_nc() {
+	nc -lvnp $1
+}
+
+_ncat() {
+	ncat -lvnp $1
+}
+
+{
+	while getopts ':np:h' opts
+	do
+		case $opts in
+			n)
+				_use_ncat=1
+				;;
+			p)
+				_port=$OPTARG
+				;;
+			h)
+				printf "Usage: %s [-n] [-p port]\n" $(basename $0)
+				printf "  -n\t\tUse ncat\n"
+				printf "  -p port\tSpecific port, default 9000\n"
+				exit 0
+				;;
+		esac
+	done
+
+	printf "Port = %s\n" $_port
+
+	if test $_use_ncat == 1
+	then
+		_ncat $_port
+	else
+		case $_arch in
+			Darwin)
+				_osx_nc $_port
+				;;
+			*)
+				_linux_nc $_port
+				;;
+		esac
+	fi
+}
