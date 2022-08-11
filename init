@@ -3,8 +3,11 @@ alias ll="ls -Alh --color"
 alias ds="du -hs"
 alias d="cd ~/Desktop"
 alias gc1="git clone --depth 1"
-alias ms='multipass shell'
-alias phs='python3 -m http.server -b 0.0.0.0'
+alias ms="multipass shell"
+alias phs="python3 -m http.server -b 0.0.0.0"
+
+# --- git aliases ---
+alias gac="git add . && git commit -m"
 
 # --- quickly reload bash profile or bashrc ---
 if test -e ~/.bash_profile
