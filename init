@@ -2,19 +2,19 @@
 alias ll="ls -Alh --color"
 alias ds="du -hs"
 alias d="cd ~/Desktop"
-alias gc1="git clone --depth 1"
 alias ms="multipass shell"
 alias phs="python3 -m http.server -b 0.0.0.0"
 
 # --- git aliases ---
+alias gc1="git clone --depth 1"
 alias gac="git add . && git commit -m"
+alias gs="git status -s"
+alias gl="git log"
 
 # --- quickly reload bash profile or bashrc ---
-if test -e ~/.bash_profile
-then
+if [[ -e ~/.bash_profile ]]; then
     alias rrr=". ~/.bash_profile"
-elif test -e ~/.bashrc
-then
+elif [[ -e ~/.bashrc ]] ;then
     alias rrr=". ~/.bashrc"
 fi
 
@@ -26,6 +26,7 @@ h() {
     echo "rrr Reload bash profile"
     echo "calc 1+1"
     echo "dotenv [file]"
+    echo "whatweb [domain]"
 }
 
 emojied() {
@@ -53,4 +54,8 @@ calc() {
 
 dotenv() {
     export $(cat ${1:-.env} | grep -o -i '^[a-z0-9]\+=.*' | xargs)
+}
+
+whatweb() {
+    curl -F target=${1} -H referer:https://wwww.hatweb.net/ https://www.whatweb.net/whatweb.php
 }
