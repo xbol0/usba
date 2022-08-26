@@ -1,0 +1,48 @@
+#!/bin/bash
+
+set -e
+
+ua="Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:104.0) Gecko/20100101 Firefox/104.0"
+size="auto"
+imgcat="$HOME/.iterm2/imgcat"
+
+if [[ ! -e $imgcat ]]; then
+	echo "This command required iterm2's imgcat."
+	exit 1
+fi
+
+_get_top_list() {
+	curl -A "$ua" -fsSL "https://jandan.net/top" | 
+	awk -F '"' '/sinaimg\.cn/ {print "https:"$2}'
+}
+
+_help() {
+	cat <<EOF
+$(basename $0) [-s SIZE] [-c IMGCAT_CMD] [-a USER_AGENT]
+  -s SIZE		Param for imgcat -W, defaults to auto.
+  -c FILE		Specific imgcat command.
+  -a UA 		Specific user-agent.
+EOF
+}
+
+while getopts ':s:c:a:h' opt; do
+	case $opt in
+		s) size=$OPTARG;;
+		c) imgcat="$OPTARG";;
+		a) ua="$OPTARG";;
+		h) _help; exit;;
+	esac
+done
+
+_show_img_loop() {
+	imgs=($(_get_top_list))
+
+	for url in ${imgs[*]}; do
+		echo $url
+		curl -fsSL -A "$ua" "$url" | $imgcat -W "$size"
+		read -p "Press any key to continue, or Ctrl+C to Exit." -s -n 1 _
+		printf "\e[2K\e[1G"
+	done
+}
+
+_show_img_loop
