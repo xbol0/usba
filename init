@@ -2,8 +2,10 @@
 alias ll="ls -Alh --color"
 alias ds="du -hs"
 alias d="cd ~/Desktop"
+alias opt="cd /opt"
 alias ms="multipass shell"
 alias phs="python3 -m http.server -b 0.0.0.0"
+alias rmrf="rm -rf"
 
 # --- git aliases ---
 alias gc1="git clone --depth 1"
@@ -14,8 +16,10 @@ alias gl="git log"
 # --- quickly reload bash profile or bashrc ---
 if [[ -e ~/.bash_profile ]]; then
     alias rrr=". ~/.bash_profile"
+    alias eee="vim ~/.bash_profile"
 elif [[ -e ~/.bashrc ]] ;then
     alias rrr=". ~/.bashrc"
+    alias eee="vim ~/.bashrc"
 fi
 
 # --- Functions ---
