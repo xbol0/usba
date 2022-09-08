@@ -7,7 +7,6 @@ _key="$PUSHDEER_KEY"
 _type="text"
 _desp=""
 _text=""
-_pos=0
 
 while getopts ":itmd:" opt; do
     case $opt in
@@ -16,7 +15,6 @@ while getopts ":itmd:" opt; do
         m) _type="markdown";;
         d) _desp=$OPTARG;;
     esac
-    _pos=$OPTIND
 done
 
 _text=${BASH_ARGV[0]}
@@ -26,8 +24,8 @@ if [[ $_text == "-" ]]; then
 fi
 
 if [ $_type == "markdown" ]; then
-	resp=$(curl -X POST -F pushkey=$_key -F text="$_text" \
-	-F type=$_type -F desp="$_desp" -fsSL $_url);
+	resp=$(curl -X POST -F pushkey=$_key -F text="$_desp" \
+	-F type=$_type -F desp="$_text" -fsSL $_url);
 else
 	resp=$(curl -X POST -F pushkey=$_key -F text="$_text" \
 	-F type=$_type -fsSL $_url);
