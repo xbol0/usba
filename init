@@ -32,6 +32,7 @@ h() {
     echo "calc 1+1"
     echo "dotenv [file]"
     echo "whatweb [domain]"
+    echo "proxypass [local_port] [remote_addr] [remote_port]"
 }
 
 emojied() {
@@ -63,4 +64,8 @@ dotenv() {
 
 whatweb() {
     curl -F target=${1} -H referer:https://wwww.hatweb.net/ https://www.whatweb.net/whatweb.php
+}
+
+proxypass() {
+    nc -kl $1 5<> /dev/tcp/${2}/${3} 0<&5 1>&5
 }
