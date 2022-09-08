@@ -21,6 +21,10 @@ done
 
 _text=${BASH_ARGV[0]}
 
+if [[ $_text == "-" ]]; then
+    _text=$(cat <&0)
+fi
+
 if [ $_type == "markdown" ]; then
 	resp=$(curl -X POST -F pushkey=$_key -F text="$_text" \
 	-F type=$_type -F desp="$_desp" -fsSL $_url);
