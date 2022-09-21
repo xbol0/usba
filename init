@@ -7,6 +7,7 @@ alias ms="multipass shell"
 alias phs="python3 -m http.server -b 0.0.0.0"
 alias rmrf="rm -rf"
 alias ppp="export https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 all_proxy=socks5://127.0.0.1:7890"
+alias vi="hx"
 
 # --- git aliases ---
 alias gc1="git clone --depth 1"
