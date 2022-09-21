@@ -14,6 +14,7 @@ alias gc1="git clone --depth 1"
 alias gac="git add . && git commit -m"
 alias gs="git status -s"
 alias gl="git log"
+alias gl1="git log --oneline"
 
 # --- quickly reload bash profile or bashrc ---
 if [[ -e ~/.bash_profile ]]; then
