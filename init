@@ -34,6 +34,7 @@ h() {
     echo "dotenv [file]"
     echo "whatweb [domain]"
     echo "proxypass [local_port] [remote_addr] [remote_port]"
+    echo "tdd [dns_server]"
 }
 
 emojied() {
@@ -69,4 +70,8 @@ whatweb() {
 
 proxypass() {
     nc -kl $1 5<> /dev/tcp/${2}/${3} 0<&5 1>&5
+}
+
+tdd() {
+    dig producthunt.com @$1 | grep ';; Query time' | grep -E -o '[0-9]+'
 }
