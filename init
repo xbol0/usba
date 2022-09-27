@@ -37,6 +37,7 @@ h() {
     echo "whatweb [domain]"
     echo "proxypass [local_port] [remote_addr] [remote_port]"
     echo "tdd [dns_server]"
+    echo "lep [site] [login]"
 }
 
 emojied() {
@@ -76,4 +77,8 @@ proxypass() {
 
 tdd() {
     dig producthunt.com @$1 | grep ';; Query time' | grep -E -o '[0-9]+'
+}
+
+lep() {
+    lesspass "$1" "$2" | pbcopy
 }
