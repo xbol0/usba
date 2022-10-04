@@ -1,5 +1,9 @@
 # --- Aliases ---
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
 alias ll="ls -Alh --color"
+alias l="ls -Alh --color"
 alias ds="du -hs"
 alias d="cd ~/Desktop"
 alias opt="cd /opt"
