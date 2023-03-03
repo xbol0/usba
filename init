@@ -7,12 +7,11 @@ alias l="ls -Alh --color"
 alias ds="du -hs"
 alias d="cd ~/Desktop"
 alias opt="cd /opt"
-alias ms="multipass shell"
 alias phs="python3 -m http.server -b 0.0.0.0"
 alias rmrf="rm -rf"
 alias ppp="export https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 all_proxy=socks5://127.0.0.1:7890"
-alias vi="hx"
 alias cpb="printf '' | pbcopy"
+alias tl="command time -l -h"
 
 # --- git aliases ---
 alias gc1="git clone --depth 1"
@@ -20,6 +19,11 @@ alias gac="git add . && git commit -m"
 alias gs="git status -s"
 alias gl="git log"
 alias gl1="git log --oneline"
+alias gp="git push"
+
+# --- python venv ---
+alias va=". venv/bin/activate"
+alias vd="deactivate"
 
 # --- quickly reload bash profile or bashrc ---
 if [[ -e ~/.bash_profile ]]; then
@@ -32,6 +36,7 @@ fi
 
 # --- Functions ---
 h() {
+    alias
     echo "emojied [URL]"
     echo "af8x [URL]"
     echo "calc 1+1"
